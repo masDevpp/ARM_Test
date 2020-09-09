@@ -15,20 +15,20 @@ TARGET  = code.elf
 DISASM  = code.dis
 IMAGE   = code.img
 
-all       :	$(TARGET) $(DISASM) $(IMAGE)
+all       : $(TARGET) $(DISASM) $(IMAGE)
 
-$(TARGET) :	$(OBJS)
+$(TARGET) : $(OBJS)
 			$(CC) $(OBJS) $(CCFLAGS)
 			$(LD) $(OBJS) $(LDFLAGS) -o $(TARGET)
 
-$(DISASM) :	$(TARGET)
+$(DISASM) : $(TARGET)
 			$(OBJDUMP) -d $(TARGET) > $(DISASM)
 
 $(IMAGE)  : $(TARGET)
 			$(OBJCOPY) -O binary $(TARGET) $(IMAGE)
 
-clear     : 
+clean     : 
 			rm --force $(OBJS) $(TARGET) $(DISASM) $(IMAGE)
 
-header    :
+header    : 
 			$(OBJDUMP) $(TARGET) -h
