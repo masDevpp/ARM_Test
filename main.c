@@ -9,7 +9,7 @@ extern char* _data_load_size;
 extern char* _data_load_destinatin;
 
 int main() {
-    load_memory();
+    loadMemory();
 
     int a = 0;
     int b = 2;
@@ -19,7 +19,7 @@ int main() {
     return 0;
 }
 
-void load_memory() {
+void loadMemory() {
     for (int i = 0; i < (unsigned int)_data_load_size; i++) {
         _data_load_destinatin[i] = _data_load_source[i];
     }

@@ -1,2 +1,2 @@
 int main();
-void load_memory();
+void loadMemory();
