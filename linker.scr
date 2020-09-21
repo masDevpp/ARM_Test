@@ -21,4 +21,6 @@ SECTIONS {
     _data_load_source = LOADADDR(.data);
     _data_load_size = SIZEOF(.data);
     _data_load_destinatin = ADDR(.data);
+    _bss_address = ADDR(.bss);
+    _bss_size = SIZEOF(.bss);
 }
