@@ -1,3 +1,4 @@
+#pragma GCC target ("thumb")
 #include "main.h"
 
 int GlobalInt = 3;

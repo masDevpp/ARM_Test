@@ -6,7 +6,7 @@ OBJCOPY = arm-none-eabi-objcopy
 
 LINKERSCR = linker.scr
 
-CCFLAGS = -c -Wall
+CCFLAGS = -c -Wall -march=armv7e-m -mcpu=cortex-m4 -mthumb
 
 OBJS    = main.o vector.o vector_handler.o
 
