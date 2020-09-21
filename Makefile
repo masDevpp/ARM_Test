@@ -14,7 +14,7 @@ BINDIR = bin
 
 TARGET  = code.elf
 DISASM  = code.dis
-IMAGE   = code.img
+IMAGE   = code.bin
 
 all       :	$(TARGET) $(DISASM) $(IMAGE)
 
@@ -33,3 +33,6 @@ clean     :
 
 header    : 
 			$(OBJDUMP) $(TARGET) -h
+
+sym       :
+			$(OBJDUMP) $(TARGET) -t
