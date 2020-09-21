@@ -12,8 +12,9 @@ extern char _bss_address[];
 extern char _bss_size[];
 
 int main() {
+    //systemSetup();
     loadMemory();
-
+    
     int a = 0;
     int b = 2;
     GlobalIntUninit = a + b + GlobalInt;
@@ -48,6 +49,27 @@ void loadMemory() {
         _bss_address[i] = 0;
     }
 }
+
+void systemSetup() {
+    // System control block start from address 0xE000E008 (refer Cortex-M4 manual)
+    // RCC registers start from address 0x40023800 (refer STM32F446 manual)
+    
+    // Set coprocessor full access
+    *((uint32 *)0xE000ED88) = 0x00ff0000;
+
+    // Set HSI oscillator on (high-speed clock enable) by clock control register (CR)
+    *((uint32 *)0x40023800) = 0x00000001;
+
+    // Reset clock configure register
+    *((uint32 *)0x40023808) = 0;
+
+    // Disable interrupt by set CIR register
+    *((uint32 *)0x4002380c) = 0;
+
+    // Set vector table offset register
+    *((uint32 *)0xE000ED08) = 0x08000000;
+}
+
 void setupLED() {
     // GPIOA clock enable by RCC_AHB1ENR
     *((uint32 *)RCC_AHB1ENR) |= RCC_AHB1ENR_GPIOAEN_MASK;

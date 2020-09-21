@@ -24,7 +24,10 @@ const uint32 RCC_AHB1ENR  = RCC + 0x30;
 const uint32 RCC_AHB1ENR_GPIOAEN_MASK = 0x00000001;
 
 int main();
-void loadMemory();void setupLED();
+
+void loadMemory();
+void systemSetup();
+
 void setupLED();
 void setLEDOn();
 void setLEDOff();
