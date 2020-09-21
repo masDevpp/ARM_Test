@@ -8,7 +8,7 @@ LINKERSCR = linker.scr
 
 CCFLAGS = -c -Wall
 
-OBJS    = main.o startup.o
+OBJS    = main.o vector.o vector_handler.o
 
 BINDIR = bin
 

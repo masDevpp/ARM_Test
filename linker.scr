@@ -1,10 +1,13 @@
 MEMORY {
-    ROM (RX) : ORIGIN = 0x0, LENGTH = 512K
+    ROM (RX) : ORIGIN = 0x08000000, LENGTH = 512K
     RAM (W)  : ORIGIN = 0x20000000, LENGTH = 128K
 }
 
 SECTIONS {
-    .startup : { startup.o }
+    .vector : { 
+        vector.o
+        vector_handler.o
+    }
     
     .text   : { *(.text) }
     .rodata : { *(.rodata) }
