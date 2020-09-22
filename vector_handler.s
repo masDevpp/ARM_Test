@@ -14,9 +14,8 @@
 
 _reset_handler:
 movw    fp, #0
-movw    sp, #0
-movw    sp, #0xfff0      // Set sp to 0x2001fff0
-movt    sp, #0x2001
+ldr     r1, =_stack_bottom
+mov     sp, r1
 bl  main
 b   _inf_loop
 
