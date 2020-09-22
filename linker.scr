@@ -12,10 +12,12 @@ SECTIONS {
     .text   : { *(.text) }
     .rodata : { *(.rodata) }
     
-    rodata_end = .;
+    /*.ARM.exidx : { *(.ARM.exidx) }*/
+    
+    romdata_end = .;
 
     /* rodata_end as LMA, RAM as VMA */
-    .data   : AT(rodata_end) { *(.data) } > RAM
+    .data   : AT(romdata_end) { *(.data) } > RAM
     .bss    : { *(.bss) } > RAM
 
     _data_load_source = LOADADDR(.data);
