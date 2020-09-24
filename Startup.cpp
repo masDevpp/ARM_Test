@@ -2,6 +2,7 @@
 
 void Startup::Run() {
     LoadMemory();
+    RCCSetup();
 }
 
 void Startup::LoadMemory() {
@@ -22,4 +23,8 @@ void Startup::LoadMemory() {
     for (int i = 0; i < size; i++) {
         _bss_address[i] = 0;
     }
+}
+
+void Startup::RCCSetup() {
+    *((uint32 *)RCC_AHB1ENR) |= RCC_AHB1ENR_GPIOAEN_MASK;
 }

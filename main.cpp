@@ -6,6 +6,7 @@
 int GlobalInt = 3;
 int GlobalInt2 = 3;
 int GlobalIntUninit;
+int LEDBlinkOverride = 0;
 
 int main() {
     Startup::Run();
@@ -21,6 +22,7 @@ int main() {
         LEDManager::SetLED((i % 2) == 0);
 
         int waitLoop = (i < 50) ? 50000 : 500000;
+        waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;
 
         for (int i = 0; i < waitLoop; i++);
     }

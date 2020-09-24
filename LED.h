@@ -17,10 +17,4 @@ private:
     static const uint32 GPIOA_ODR_PA5_MASK = 0x00000020;
     static const uint32 GPIOA_BSRR_PA5_SET_MASK = 0x00000020;
     static const uint32 GPIOA_BSRR_PA5_RESET_MASK = 0x00200000;
-
-    // RCC
-    static const uint32 RCC          = 0x40023800;
-    static const uint32 RCC_AHB1ENR  = RCC + 0x30;
-
-    static const uint32 RCC_AHB1ENR_GPIOAEN_MASK = 0x00000001;
 };
