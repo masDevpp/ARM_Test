@@ -2,11 +2,13 @@
 #include "main.h"
 #include "Startup.h"
 #include "LED.h"
+#include "Timer.h"
 
 int GlobalInt = 3;
 int GlobalInt2 = 3;
 int GlobalIntUninit;
 int LEDBlinkOverride = 0;
+uint32 TimerElapse;
 
 int main() {
     Startup::Run();
@@ -15,6 +17,13 @@ int main() {
     int b = 2;
     GlobalIntUninit = a + b + GlobalInt;
     GlobalInt2 = GlobalIntUninit * 2;
+
+    Timer timer;
+    timer.Setup();
+    timer.Start();
+    for (int i = 0; i< 2000000; i++) ;
+    TimerElapse = timer.GetElapseMs();
+    timer.Stop();
     
     LEDManager::SetupLED();
     

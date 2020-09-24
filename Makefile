@@ -8,8 +8,8 @@ LINKERSCR = linker.scr
 
 CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions
 
-CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp
-OBJS    = main.o vector.o vector_handler.o LED.o Startup.o
+CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp
+OBJS    = main.o vector.o vector_handler.o LED.o Startup.o Timer.o
 
 BINDIR = bin
 
