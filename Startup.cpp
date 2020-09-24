@@ -1,6 +1,10 @@
 #include "Startup.h"
 
 void Startup::Run() {
+    // Enable FPU by coprocessor access control register
+    uint32 *cpacr = (uint32 *)0xE000ED88;
+    *cpacr = 0x00F00000;
+
     LoadMemory();
     RCCSetup();
 }
