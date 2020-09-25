@@ -3,6 +3,7 @@ AS      = arm-none-eabi-as
 LD      = arm-none-eabi-ld
 OBJDUMP = arm-none-eabi-objdump
 OBJCOPY = arm-none-eabi-objcopy
+WRITER  = "C:/Program Files (x86)/STMicroelectronics/STM32 ST-LINK Utility/ST-LINK Utility/ST-LINK_CLI.exe"
 
 LINKERSCR = linker.scr
 
@@ -37,3 +38,7 @@ header    :
 
 sym       :
 			$(OBJDUMP) $(TARGET) -t
+
+write     : $(IMAGE)
+			$(WRITER) -P $(IMAGE) 0x08000000
+			$(WRITER) -Rst
