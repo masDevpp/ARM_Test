@@ -11,7 +11,7 @@ private:
     uint16 PreScaler;
     uint32 AutoReload;
 
-    uint32 HSIClock = 16 * 1024 * 1024; // 16MHz
+    uint32 HSIClock = 16 * 1000 * 1000; // 16MHz
 
     uint32 *TIM2 = (uint32 *)0x40000000;
     uint32 *TIM2_CR1 = TIM2 + 0x00 / 4;
