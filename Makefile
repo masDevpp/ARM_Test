@@ -10,7 +10,7 @@ LINKERSCR = linker.scr
 CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions
 
 CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp
-OBJS    = main.o vector.o vector_handler.o LED.o Startup.o Timer.o
+OBJ     = *.o
 
 BINDIR = bin
 
@@ -20,9 +20,9 @@ IMAGE   = code.bin
 
 all       :	$(TARGET) $(DISASM) $(IMAGE)
 
-$(TARGET) :	$(OBJS) $(LINKERSCR)
+$(TARGET) :	$(CODES) $(LINKERSCR)
 			$(CC) $(CODES) $(CCFLAGS)
-			$(LD) $(OBJS) -T $(LINKERSCR) -o $(TARGET)
+			$(LD) $(OBJ) -T $(LINKERSCR) -o $(TARGET)
 
 $(DISASM) :	$(TARGET)
 			$(OBJDUMP) -d $(TARGET) > $(DISASM)
@@ -31,7 +31,7 @@ $(IMAGE)  :	$(TARGET)
 			$(OBJCOPY) -O binary $(TARGET) $(IMAGE)
 
 clean     : 
-			rm --force $(OBJS) $(TARGET) $(DISASM) $(IMAGE)
+			rm --force $(OBJ) $(TARGET) $(DISASM) $(IMAGE)
 
 header    : 
 			$(OBJDUMP) $(TARGET) -h
