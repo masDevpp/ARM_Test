@@ -25,15 +25,25 @@ mov r0, #1
 b   _inf_loop
 
 _hard_fault_handler:
+push    {lr}
 mov r0, #2
+ldr r1, =0xE000ED2C // HFSR (Hard fault status register)
+ldr r1, [r1]
+ldr r2, =0xE000ED30 // DFSR (Degug fault status register)
+ldr r2, [r2]
+MRS r3, CONTROL
 b   _inf_loop
 
 _mem_manage_handler:
 mov r0, #3
+ldr r1, =0xE000ED34 // MMFAR (Mem manage fault address register)
+ldr r1, [r1]
 b   _inf_loop
 
 _bus_fault_handler:
 mov r0, #4
+ldr r1, =0xE000ED38 // BFAR (Bus fault address register)
+ldr r1, [r1]
 b   _inf_loop
 
 _usage_fault_handler:
