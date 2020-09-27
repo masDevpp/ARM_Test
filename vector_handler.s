@@ -11,6 +11,7 @@
 .global _pend_sv_handler
 .global _sys_tick_handler
 .global _irq_handler
+.global _usart2_handler
 
 _reset_handler:
 movw    fp, #0
@@ -56,6 +57,15 @@ mov r0, #9
 b   _inf_loop
 
 _inf_loop:
-add r1, r1, #1
-b   _inf_loop
+push {r7, lr}
+mov r7, #0
+
+_inf_loop_internal:
+add r7, r7, #1
+b   _inf_loop_internal
+
+_usart2_handler:
+push    {lr}
+blx  _Z9SerialIntv
+pop     {pc}
 

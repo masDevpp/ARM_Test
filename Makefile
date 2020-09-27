@@ -9,7 +9,7 @@ LINKERSCR = linker.scr
 
 CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions
 
-CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp
+CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp SerialHandler.cpp
 OBJ     = *.o
 
 BINDIR = bin
@@ -37,7 +37,8 @@ header    :
 			$(OBJDUMP) $(TARGET) -h
 
 sym       :
-			$(OBJDUMP) $(TARGET) -t
+			$(OBJDUMP) $(TARGET) -t | grep \.data
+			$(OBJDUMP) $(TARGET) -t | grep \.bss
 
 write     : $(IMAGE)
 			$(WRITER) -P $(IMAGE) 0x08000000

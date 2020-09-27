@@ -3,6 +3,7 @@
 #include "Startup.h"
 #include "LED.h"
 #include "Timer.h"
+#include "SerialHandler.h"
 
 int GlobalInt = 3;
 int GlobalInt2 = 3;
@@ -24,6 +25,9 @@ int main() {
     for (int i = 0; i< 2000000; i++) ;
     TimerElapse = timer.GetElapseMs();
     timer.Stop();
+
+    SerialHandler serial;
+    serial.Setup();
     
     LEDManager::SetupLED();
     
@@ -34,6 +38,7 @@ int main() {
         waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;
 
         for (int i = 0; i < waitLoop; i++);
+        serial.SendByte((uint8)"0123456789ABCDEF"[(i&0xf)]);
     }
 
     return 0;

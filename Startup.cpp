@@ -31,5 +31,5 @@ void Startup::LoadMemory() {
 
 void Startup::RCCSetup() {
     *((uint32 *)RCC_AHB1ENR) |= RCC_AHB1ENR_GPIOAEN_MASK;
-    *((uint32 *)RCC_APB1ENR) |= RCC_APB1ENA_APB1ENR_MASK;
+    *((uint32 *)RCC_APB1ENR) |= RCC_APB1ENA_APB1ENR_MASK | RCC_APB1ENA_USART2EN_MASK;
 }
