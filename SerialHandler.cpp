@@ -67,3 +67,12 @@ void SerialHandler::SendByte(uint8 data) {
         *USART2_CR1 &= ~USART2_CR1_TE_MASK;
     }
 }
+
+void SerialHandler::SendString(char *chars) {
+    char data = *chars++;
+
+    while (data != '\0') {
+        SendByte(data);
+        data = *chars++;
+    }
+}

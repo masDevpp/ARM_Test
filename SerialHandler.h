@@ -4,6 +4,7 @@ class SerialHandler {
 public:
     void Setup();
     void SendByte(uint8 data);
+    void SendString(char *chars);
 
 private:
     // GPIOA

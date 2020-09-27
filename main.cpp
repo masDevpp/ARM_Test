@@ -18,6 +18,10 @@ int main() {
     int b = 2;
     GlobalIntUninit = a + b + GlobalInt;
     GlobalInt2 = GlobalIntUninit * 2;
+    
+    SerialHandler serial;
+    serial.Setup();
+    serial.SendString("\n\rSystem start\n\r");
 
     Timer timer;
     timer.Setup();
@@ -26,10 +30,8 @@ int main() {
     TimerElapse = timer.GetElapseMs();
     timer.Stop();
 
-    SerialHandler serial;
-    serial.Setup();
-    
     LEDManager::SetupLED();
+    serial.SendString("LED ready\n\r");
     
     for (int i = 0; ; i++) {
         LEDManager::SetLED((i % 2) == 0);
