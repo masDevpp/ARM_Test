@@ -7,7 +7,7 @@ WRITER  = "C:/Program Files (x86)/STMicroelectronics/STM32 ST-LINK Utility/ST-LI
 
 LINKERSCR = linker.scr
 
-CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions
+CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions -g
 
 CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp SerialHandler.cpp
 OBJ     = *.o
@@ -25,7 +25,7 @@ $(TARGET) :	$(CODES) $(LINKERSCR)
 			$(LD) $(OBJ) -T $(LINKERSCR) -o $(TARGET)
 
 $(DISASM) :	$(TARGET)
-			$(OBJDUMP) -d $(TARGET) > $(DISASM)
+			$(OBJDUMP) -d -S $(TARGET) > $(DISASM)
 
 $(IMAGE)  :	$(TARGET)
 			$(OBJCOPY) -O binary $(TARGET) $(IMAGE)
