@@ -25,5 +25,5 @@ SECTIONS {
     _data_load_destinatin = ADDR(.data);
     _bss_address = ADDR(.bss);
     _bss_size = SIZEOF(.bss);
-    _stack_bottom = ORIGIN(RAM) + LENGTH(RAM) - 0x10;
+    _stack_bottom = (ORIGIN(RAM) + LENGTH(RAM) - 0x10) & 0xfffffffc;
 }
