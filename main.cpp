@@ -31,11 +31,11 @@ int main() {
     TimerElapse = timer.GetElapseMs();
     timer.Stop();
 
-    LEDManager::SetupLED();
+    LEDManager led;
     serial.SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
-        LEDManager::SetLED((i % 2) == 0);
+        led.SetLED((i % 2) == 0);
 
         int waitLoop = (i < 50) ? 50000 : 500000;
         waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;

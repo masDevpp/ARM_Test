@@ -1,15 +1,15 @@
 //#pragma G++ target ("thumb")
 #include "LED.h"
 
-void LEDManager::SetupLED() {
-    // LED (LD2) is connected to PA5 of GPIOA
-    *((uint32 *)GPIOA_MODER) |= GPIOA_MODER_PA5_OUTPUT_MODE_MASK;
+LEDManager::LEDManager() {
+    // LED (LD2) is connected to pin5 of GPIOA (PA5)
+    GPIOA_MODER->MODER5 = GPIO_MODER_OUTPUT;
 }
 
 void LEDManager::SetLED(bool isOn) {
     if (isOn) {
-        *((uint32 *)GPIOA_BSRR) |= GPIOA_BSRR_PA5_SET_MASK;
+        GPIOA_BSRR->BS5 = 1;
     } else {
-        *((uint32 *)GPIOA_BSRR) |= GPIOA_BSRR_PA5_RESET_MASK;
+        GPIOA_BSRR->BR5 = 1;
     }
 }
