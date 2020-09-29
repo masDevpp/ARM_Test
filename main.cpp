@@ -10,6 +10,7 @@ int GlobalInt2 = 3;
 int GlobalIntUninit;
 int LEDBlinkOverride = 0;
 uint32 TimerElapse;
+extern uint8 (*SerialReceiveFunction)();
 
 int main() {
     Startup::Run();
@@ -21,7 +22,7 @@ int main() {
     
     SerialHandler serial;
     serial.Setup();
-    serial.SendString("\n\rSystem start\n\r");
+    serial.SendString((char *)"\n\rSystem start\n\r");
 
     Timer timer;
     timer.Setup();
@@ -31,7 +32,7 @@ int main() {
     timer.Stop();
 
     LEDManager::SetupLED();
-    serial.SendString("LED ready\n\r");
+    serial.SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
         LEDManager::SetLED((i % 2) == 0);

@@ -1,6 +1,8 @@
 // Set instruction as thumb
 .code 16
 
+.align 2
+
 .global _reset_handler
 .global _nmi_handler
 .global _hard_fault_handler
@@ -76,6 +78,7 @@ b   _inf_loop_internal
 
 _usart2_handler:
 push    {lr}
-blx  _Z9SerialIntv
+//blx  _Z9SerialIntv
+blx _ZN13SerialHandler9SerialIntEv
 pop     {pc}
 
