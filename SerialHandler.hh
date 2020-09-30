@@ -1,6 +1,4 @@
-#ifndef SERIALHANDLER_HH
-#define SERIALHANDLER_HH
-
+#pragma once
 #include "DataType.h"
 
 typedef struct USART_SR_struct {
@@ -85,5 +83,3 @@ typedef struct USART_CR3_struct {
     uint32 ONEBIT : 1;
     uint32        : 20;
 } USART_CR3;
-
-#endif

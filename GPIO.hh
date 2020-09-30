@@ -1,6 +1,4 @@
-#ifndef GPIO_HH
-#define GPIO_HH
-
+#pragma once
 #include "DataType.h"
 
 // GPIO port mode register
@@ -129,5 +127,3 @@ typedef struct GPIO_AFRH_struct {
     uint32 AFRH6 : 4;
     uint32 AFRH7 : 4;
 } GPIO_AFRH;
-
-#endif
