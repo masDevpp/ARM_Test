@@ -1,4 +1,5 @@
 #include "Startup.h"
+#include "Memory.h"
 
 void Startup::Run() {
     // Enable FPU by coprocessor access control register
@@ -6,6 +7,9 @@ void Startup::Run() {
     *cpacr = 0x00F00000;
 
     LoadMemory();
+
+    Memory::Setup();
+
     RCCSetup();
 }
 
