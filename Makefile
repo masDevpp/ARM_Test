@@ -36,6 +36,9 @@ clean     :
 header    : 
 			$(OBJDUMP) $(TARGET) -h
 
+alsm      :
+			$(OBJDUMP) $(TARGET) -t
+
 sym       :
 			$(OBJDUMP) $(TARGET) -t | grep \.data
 			$(OBJDUMP) $(TARGET) -t | grep \.bss
