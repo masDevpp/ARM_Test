@@ -10,7 +10,6 @@ int GlobalInt2 = 3;
 int GlobalIntUninit;
 int LEDBlinkOverride = 0;
 uint32 TimerElapse;
-extern uint8 (*SerialReceiveFunction)();
 
 int main() {
     Startup::Run();
@@ -20,9 +19,8 @@ int main() {
     GlobalIntUninit = a + b + GlobalInt;
     GlobalInt2 = GlobalIntUninit * 2;
     
-    SerialHandler serial;
-    serial.Setup();
-    serial.SendString((char *)"\n\rSystem start\n\r");
+    SerialHandler::Setup();
+    SerialHandler::SendString((char *)"\n\rSystem start\n\r");
 
     Timer timer;
     timer.Setup();
@@ -32,7 +30,7 @@ int main() {
     timer.Stop();
 
     LEDManager led;
-    serial.SendString((char *)"LED ready\n\r");
+    SerialHandler::SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
         led.SetLED((i % 2) == 0);
@@ -41,9 +39,18 @@ int main() {
         waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;
 
         for (int i = 0; i < waitLoop; i++);
-        serial.SendByte((uint8)"0123456789ABCDEF"[(i&0xf)]);
+        SerialHandler::SendByte((uint8)"0123456789ABCDEF"[(i&0xf)]);
     }
 
     return 0;
 }
 
+void SerialInterrupt() {
+    SerialHandler::SerialInterrupt();
+    
+    if (SerialHandler::IsReceiveComplete) {
+        SerialHandler::SendString((char *)"\n\r");
+        SerialHandler::SendString((char *)SerialHandler::SerialBuffer);
+        SerialHandler::SendString((char *)"\n\r");
+    }
+}
