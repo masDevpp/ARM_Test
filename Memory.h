@@ -17,9 +17,9 @@ public:
     static void Release(uint32 address);
 
     static const uint32 SEGMENT_NOT_AVAILABLE = 0xffffffff;
+    static const uint32 SEGMENT_SIZE = 0x80;
 
 private:
-    static const uint32 SEGMENT_SIZE = 0x80;
     static Segment *SegmentTable;
     static uint32 SegmentTableLength;
 
