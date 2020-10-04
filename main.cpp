@@ -5,31 +5,25 @@
 #include "Timer.h"
 #include "SerialHandler.h"
 
-int GlobalInt = 3;
-int GlobalInt2 = 3;
-int GlobalIntUninit;
 int LEDBlinkOverride = 0;
 uint32 TimerElapse;
 
 int main() {
     Startup::Run();
 
-    int a = 0;
-    int b = 2;
-    GlobalIntUninit = a + b + GlobalInt;
-    GlobalInt2 = GlobalIntUninit * 2;
-    
     SerialHandler::Setup();
     SerialHandler::SendString((char *)"\n\rSystem start\n\r");
+
+    LEDManager led;
+    led.SetLED(true);
 
     Timer timer;
     timer.Setup();
     timer.Start();
-    for (int i = 0; i< 2000000; i++) ;
+    for (int i = 0; i< 1000000; i++) ;
     TimerElapse = timer.GetElapseMs();
     timer.Stop();
 
-    LEDManager led;
     SerialHandler::SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
