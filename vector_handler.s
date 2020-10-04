@@ -9,7 +9,7 @@
 .global _mem_manage_handler
 .global _bus_fault_handler
 .global _usage_fault_handler
-.global _svc_call_handler
+.global _sv_call_handler
 .global _pend_sv_handler
 .global _sys_tick_handler
 .global _irq_handler
@@ -52,7 +52,7 @@ _usage_fault_handler:
 mov r0, #5
 b   _inf_loop
 
-_svc_call_handler:
+_sv_call_handler:
 mov r0, #6
 b   _inf_loop
 

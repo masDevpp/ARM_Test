@@ -15,7 +15,7 @@
 .word   0 // 0x20
 .word   0
 .word   0
-.word   _svc_call_handler + 1
+.word   _sv_call_handler + 1
 .word   0
 .word   0
 .word   _pend_sv_handler + 1
