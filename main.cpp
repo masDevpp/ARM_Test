@@ -11,11 +11,11 @@ uint32 TimerElapse;
 int main() {
     Startup::Run();
 
+    LEDManager::Setup();
+    LEDManager::SetLED(true);
+
     SerialHandler::Setup();
     SerialHandler::SendString((char *)"\n\rSystem start\n\r");
-
-    LEDManager led;
-    led.SetLED(true);
 
     Timer timer;
     timer.Setup();
@@ -27,7 +27,7 @@ int main() {
     SerialHandler::SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
-        led.SetLED((i % 2) == 0);
+        LEDManager::SetLED(!LEDManager::GetLED());
 
         int waitLoop = (i < 50) ? 50000 : 500000;
         waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;

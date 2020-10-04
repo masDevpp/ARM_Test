@@ -2,6 +2,7 @@
 #include "DataType.h"
 
 // GPIO port mode register
+// Offset 0x00
 typedef struct GPIO_MODER_struct {
     uint32 MODER0  : 2;
     uint32 MODER1  : 2;
@@ -27,6 +28,7 @@ const uint32 GPIO_MODER_ALTERNATE_FUNCTION = 2;
 const uint32 GPIO_MODER_ANALOG = 3;
 
 // GPIO port output type register
+// Offset 0x04
 typedef struct GPIO_OTYPER_struct {
     uint32 OT0  : 1;
     uint32 OT1  : 1;
@@ -48,6 +50,7 @@ typedef struct GPIO_OTYPER_struct {
 } GPIO_OTYPER;
 
 // GPIO port output data register
+// Offset 0x14
 typedef struct GPIO_ODR_struct {
     uint32 ODR0  : 1;
     uint32 ODR1  : 1;
@@ -69,6 +72,7 @@ typedef struct GPIO_ODR_struct {
 } GPIO_ODR;
 
 // GPIO port bit set/reset register
+// Offset 0x18
 typedef struct GPIO_BSRR_struct {
     uint32 BS0  : 1;
     uint32 BS1  : 1;
@@ -105,6 +109,7 @@ typedef struct GPIO_BSRR_struct {
 } GPIO_BSRR;
 
 // GPIO alternate function low register
+// Offset 0x20
 typedef struct GPIO_AFRL_struct {
     uint32 AFRL0 : 4;
     uint32 AFRL1 : 4;
@@ -117,6 +122,7 @@ typedef struct GPIO_AFRL_struct {
 } GPIO_AFRL;
 
 // GPIO alternate function high register
+// Offset 0x24
 typedef struct GPIO_AFRH_struct {
     uint32 AFRH0 : 4;
     uint32 AFRH1 : 4;

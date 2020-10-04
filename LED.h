@@ -3,12 +3,14 @@
 
 class LEDManager {
 public:
-    LEDManager();
-    void SetLED(bool isOn);
+    static void Setup();
+    static void SetLED(bool isOn);
+    static bool GetLED();
 
 private:
     // GPIOA
-    const uint32 GPIOA = 0x40020000;
-    volatile GPIO_MODER *GPIOA_MODER = (GPIO_MODER *)(GPIOA + 0x00);
-    volatile GPIO_BSRR  *GPIOA_BSRR  = (GPIO_BSRR  *)(GPIOA + 0x18);
+    static const uint32 GPIOA = 0x40020000;
+    static volatile GPIO_MODER *GPIOA_MODER;
+    static volatile GPIO_ODR   *GPIOA_ODR;
+    static volatile GPIO_BSRR  *GPIOA_BSRR;
 };
