@@ -1,6 +1,9 @@
 #include "Startup.h"
 #include "Memory.h"
 
+volatile RCC_AHB1ENR_reg *Startup::RCC_AHB1ENR = (RCC_AHB1ENR_reg *)(RCC + 0x30);
+volatile RCC_APB1ENR_reg *Startup::RCC_APB1ENR = (RCC_APB1ENR_reg *)(RCC + 0x40);
+
 void Startup::Run() {
     // Enable FPU by coprocessor access control register
     uint32 *cpacr = (uint32 *)0xE000ED88;
@@ -34,6 +37,7 @@ void Startup::LoadMemory() {
 }
 
 void Startup::RCCSetup() {
-    *((uint32 *)RCC_AHB1ENR) |= RCC_AHB1ENR_GPIOAEN_MASK;
-    *((uint32 *)RCC_APB1ENR) |= RCC_APB1ENA_APB1ENR_MASK | RCC_APB1ENA_USART2EN_MASK;
+    RCC_AHB1ENR->GPIOAEN  = true;
+    RCC_APB1ENR->TIM2EN   = true;
+    RCC_APB1ENR->USART2EN = true;
 }
