@@ -1,5 +1,5 @@
 #include "DataType.h"
-#include "SerialHandler.hh"
+#include "USART.hh"
 #include "GPIO.hh"
 #include "Memory.h"
 
