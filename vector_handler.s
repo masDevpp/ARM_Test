@@ -61,8 +61,11 @@ mov r0, #7
 b   _inf_loop
 
 _sys_tick_handler:
-mov r0, #8
-b   _inf_loop
+push    {lr}
+blx _Z16SysTickInterruptv
+pop     {pc}
+//mov r0, #8
+//b   _inf_loop
 
 _irq_handler:
 mov r0, #9
