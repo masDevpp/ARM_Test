@@ -29,4 +29,5 @@ SECTIONS {
     _heap_start = (ADDR(.bss) + SIZEOF(.bss) + 0x4) & 0xfffffffc;
     _stack_bottom = (ORIGIN(RAM) + LENGTH(RAM) - 0x10) & 0xfffffffc;
     _heap_size = ((_stack_bottom - _heap_start) / 2) & 0xfffffffc;
+    _stack_size = _heap_size;
 }
