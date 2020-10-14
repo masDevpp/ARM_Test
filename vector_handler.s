@@ -78,6 +78,6 @@ b   _inf_loop_internal
 
 _usart2_handler:
 push    {lr}
-blx _Z15SerialInterruptv
+bl      _ZN14CommandHandler15SerialInterruptEv
 pop     {pc}
 
