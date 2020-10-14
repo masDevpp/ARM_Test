@@ -71,20 +71,3 @@ void Kernel::SetupThread() {
     CurrentThread = LEDHandlerThread;
     NextThread = CommandHandlerThread;
 }
-
-uint32 Kernel::SysTickInterrupt(uint32 lr) {
-    
-    uint32 currentSPAddr = (uint32)&Threads[CurrentThread].SP;
-    uint32 nextSP = Threads[NextThread].SP;
-
-    CurrentThreadSP = &Threads[CurrentThread].SP;
-    NextThreadSP = &Threads[NextThread].SP;
-
-    CurrentThread = NextThread;
-    if (NextThread == LEDHandlerThread) NextThread = CommandHandlerThread;
-    else NextThread = LEDHandlerThread;
-
-    _thread_switch(currentSPAddr, nextSP, lr);
-    
-    return lr;
-}

@@ -20,9 +20,7 @@ public:
     static void Setup();
     static void SetupThread();
 
-    static uint32 SysTickInterrupt(uint32 lr);
-
-    static Thread *Threads;//[NumOfThreads];
+    static Thread *Threads;
 
     static uint32 NumberOfThreads;
 
