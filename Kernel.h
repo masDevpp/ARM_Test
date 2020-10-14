@@ -9,18 +9,10 @@ enum ThreadEnum {
     NumOfThreads,
 };
 
-class Thread {
-public:
-    void (*PC)();
-    uint32 SP;
-};
-
 class Kernel {
 public:
     static void Setup();
-    static void SetupThread();
-
-    static Thread *Threads;
+    static void SetupThread(uint32 &firstThreadPC, uint32 &firstThreadSP);
 
     static uint32 NumberOfThreads;
 
