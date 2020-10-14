@@ -19,7 +19,7 @@ _reset_handler:
 movw    fp, #0
 ldr     r1, =_stack_bottom
 mov     sp, r1
-bl  main
+bl  _ZN6Kernel5SetupEv
 b   _inf_loop
 
 _nmi_handler:
@@ -61,11 +61,8 @@ mov r0, #7
 b   _inf_loop
 
 _sys_tick_handler:
-push    {lr}
-blx _Z16SysTickInterruptv
-pop     {pc}
-//mov r0, #8
-//b   _inf_loop
+// Return operation will be done by thread_switch function so never return
+b       _thread_switch
 
 _irq_handler:
 mov r0, #9
