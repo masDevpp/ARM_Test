@@ -14,6 +14,8 @@ public:
     static void Setup();
     static void SetupThread(uint32 &firstThreadPC, uint32 &firstThreadSP);
 
+    static void Assert();
+
     static uint32 NumberOfThreads;
 
     static uint32 *KernelSP;

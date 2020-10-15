@@ -11,6 +11,7 @@ extern char _stack_size[];
 extern "C" void _setup_thread_stack(uint32 pc, uint32 sp, uint32 numContextRegister);
 extern "C" void _start_thread(uint32 pc, uint32 sp);
 extern "C" void _thread_switch(uint32 currentSPAddr, uint32 nextSP, uint32 lr);
+extern "C" void _stop_cpu();
 
 uint32 Kernel::CurrentThread;
 uint32 Kernel::NextThread;
@@ -74,4 +75,8 @@ void Kernel::SetupThread(uint32 &firstThreadPC, uint32 &firstThreadSP) {
     
     CurrentThread = LEDHandlerThread;
     NextThread = CommandHandlerThread;
+}
+
+void Kernel::Assert() {
+    _stop_cpu();
 }

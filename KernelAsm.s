@@ -1,6 +1,7 @@
 .global _setup_thread_stack 
 .global _start_thread
 .global _thread_switch
+.global _stop_cpu
 
 _setup_thread_stack:
 // r0: pc
@@ -91,3 +92,6 @@ pop     {r0-r7}
 
 // Load lr to pc
 bx      lr
+
+_stop_cpu:
+bkpt
