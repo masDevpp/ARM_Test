@@ -1,11 +1,11 @@
 #include "DataType.h"
 #include "GPIO.hh"
 
-class LEDManager {
+class LED {
 public:
     static void Setup();
-    static void SetLED(bool isOn);
-    static bool GetLED();
+    static void Set(bool isOn);
+    static bool Get();
 
 private:
     // GPIOA

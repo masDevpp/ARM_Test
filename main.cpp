@@ -12,8 +12,8 @@ uint32 TimerElapse;
 int main() {
     Startup::Run();
 
-    LEDManager::Setup();
-    LEDManager::SetLED(true);
+    LED::Setup();
+    LED::Set(true);
 
     SerialHandler::Setup();
     SerialHandler::SendString((char *)"\n\rSystem start\n\r");
@@ -39,7 +39,7 @@ int main() {
     SerialHandler::SendString((char *)"LED ready\n\r");
     
     for (int i = 0; ; i++) {
-        LEDManager::SetLED(!LEDManager::GetLED());
+        LED::Set(!LED::Get());
 
         int waitLoop = (i < 50) ? 50000 : 500000;
         waitLoop = (LEDBlinkOverride == 0) ? waitLoop : LEDBlinkOverride;
