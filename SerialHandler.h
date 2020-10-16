@@ -14,6 +14,7 @@ public:
     static bool IsReceiveComplete;// = false;
     static const uint32 SERIAL_BUFFER_LENGTH = Memory::SEGMENT_SIZE;
     static uint8 *SerialBuffer;
+    static uint8 LastReceiveByte;
 
 private:
     static uint32 SerialBufferIndex;

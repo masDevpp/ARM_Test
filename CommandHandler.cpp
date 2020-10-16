@@ -4,15 +4,17 @@
 void CommandHandler::Setup() {
     SerialHandler::Setup();
 
-    SerialHandler::SendString((char *)"\n\rSystem start\n\r");
+    SerialHandler::SendString("\n\rSystem start\n\r");
+    SerialHandler::SendString(">");
     Loop();
 }
 
 void CommandHandler::Loop() {
    while (true) {
        if (SerialHandler::IsReceiveComplete) {
-           SerialHandler::SendString((char *)SerialHandler::SerialBuffer);
-           SerialHandler::SendString((char *)"\n\r");
+           SerialHandler::SendString("\n\r");
+           SerialHandler::SendString(SerialHandler::SerialBuffer);
+           SerialHandler::SendString("\n\r>");
            SerialHandler::IsReceiveComplete = false;
        }
    }
@@ -20,4 +22,8 @@ void CommandHandler::Loop() {
 
 void CommandHandler::SerialInterrupt() {
     SerialHandler::SerialInterrupt();
+
+    if (SerialHandler::LastReceiveByte != 0) {
+        SerialHandler::SendByte(SerialHandler::LastReceiveByte);
+    }
 }

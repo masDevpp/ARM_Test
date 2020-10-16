@@ -16,6 +16,7 @@ bool SerialHandler::LFReceived = false;
 
 uint8 *SerialHandler::SerialBuffer;
 uint32 SerialHandler::SerialBufferIndex = 0;
+uint8 SerialHandler::LastReceiveByte;
 
 void SerialHandler::Setup() {
     // Setup GPIO mode
@@ -86,12 +87,15 @@ uint8 SerialHandler::ReceiveByte() {
 }
 
 void SerialHandler::SerialInterrupt() {
+    LastReceiveByte = 0;
+
     if (USART2_SR->RXNE) {
         uint8 data = ReceiveByte();
         LFReceived = data == '\n';
         CRReceived = data == '\r';
 
         SerialBuffer[SerialBufferIndex++] = data;
+        LastReceiveByte = data;
 
         if (CRReceived || (SerialBufferIndex == SERIAL_BUFFER_LENGTH - 1)) {
             SerialBuffer[SerialBufferIndex] = '\0';
