@@ -1,8 +1,6 @@
 #pragma once
 #include "DataType.h"
 
-void memset(void *buf, int ch, uint32 n);
-
 class Segment {
 public:
     // Lower 16bit of heap address

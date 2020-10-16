@@ -97,6 +97,3 @@ void Memory::Release(uint32 address) {
     }
 }
 
-void memset(void *buf, int ch, uint32 n) {
-    
-}
