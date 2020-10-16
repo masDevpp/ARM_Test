@@ -1,3 +1,4 @@
+#pragma once
 #include "DataType.h"
 
 void memset(void *buf, int ch, uint32 n);

@@ -1,3 +1,4 @@
+#pragma once
 #include "DataType.h"
 
 const uint32 NUM_CONTEXT_REGISTER = 8; // r0-r7 stored by OS

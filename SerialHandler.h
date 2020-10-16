@@ -1,3 +1,4 @@
+#pragma once
 #include "DataType.h"
 #include "USART.hh"
 #include "GPIO.hh"
