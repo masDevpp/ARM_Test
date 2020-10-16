@@ -70,7 +70,8 @@ void SerialHandler::SendByte(uint8 data) {
     }
 }
 
-void SerialHandler::SendString(char *chars) {
+void SerialHandler::SendString(const void *str) {
+    char *chars = (char *)str;
     char data = *chars++;
 
     while (data != '\0') {

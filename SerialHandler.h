@@ -7,7 +7,7 @@ class SerialHandler {
 public:
     static void Setup();
     static void SendByte(uint8 data);
-    static void SendString(char *chars);
+    static void SendString(const void *str);
     static uint8 ReceiveByte();
     static void SerialInterrupt();
 
