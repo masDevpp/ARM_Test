@@ -71,14 +71,17 @@ void SerialHandler::SendByte(uint8 data) {
     }
 }
 
-void SerialHandler::SendString(const void *str) {
+void SerialHandler::SendString(const void *str, uint32 length) {
     char *chars = (char *)str;
-    char data = *chars++;
 
-    while (data != '\0') {
-        SendByte(data);
-        data = *chars++;
+    for (uint32 i = 0; i < length; i++) {
+        SendByte(chars[i]);
+        if (chars[i] == '\0') break;
     }
+}
+
+void SerialHandler::SendString(String str) {
+    SendString(str.GetBuffer(), str.Length);
 }
 
 uint8 SerialHandler::ReceiveByte() {

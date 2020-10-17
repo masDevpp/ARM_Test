@@ -3,12 +3,14 @@
 #include "USART.hh"
 #include "GPIO.hh"
 #include "Memory.h"
+#include "String.h"
 
 class SerialHandler {
 public:
     static void Setup();
     static void SendByte(uint8 data);
-    static void SendString(const void *str);
+    static void SendString(const void *str, uint32 length = 0xffffffff);
+    static void SendString(String str);
     static uint8 ReceiveByte();
     static void SerialInterrupt();
 
