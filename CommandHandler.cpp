@@ -41,7 +41,7 @@ void CommandHandler::Loop() {
         SerialHandler::SendString(command);
         SerialHandler::SendString("\n\r");
 
-        if (command.Equal(String("echo"))) {
+        if (command.Equal("echo")) {
             SerialHandler::SendString(parameter);
         }
 

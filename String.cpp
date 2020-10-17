@@ -62,6 +62,23 @@ bool String::Equal(String target) {
     return isEqual;
 }
 
+bool String::Equal(const void *target, uint32 length) {
+    bool isEqual = false;
+    uint8 *targ = (uint8 *)target;
+
+    if (length > Length) length = Length;
+
+    for (uint32 i = 0; i < length; i++) {
+        isEqual = Buffer[i] == targ[i];
+
+        if (!isEqual) break;
+
+        if (targ[i] == '\0') break;
+    }
+
+    return isEqual;
+}
+
 String String::SubString(uint32 start, uint32 length) {
     String subString(this->Buffer + start, length);
 
