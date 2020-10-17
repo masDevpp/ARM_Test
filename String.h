@@ -4,6 +4,7 @@
 
 class String {
 public:
+    String();
     String(const void *source, uint32 length = 0xffffffff);
     String(uint32 value, uint32 base = 10);
     ~String();
