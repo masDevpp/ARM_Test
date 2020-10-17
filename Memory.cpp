@@ -1,4 +1,5 @@
 #include "Memory.h"
+#include "Kernel.h"
 
 Segment *Memory::SegmentTable;
 uint32 Memory::SegmentTableLength;
@@ -19,20 +20,21 @@ void Memory::Setup() {
 
     // Data area follow segment table
     uint32 dataStartAddress = HeapStartAddress + sizeof(Segment) * SegmentTableLength;
-    AddressHigh = dataStartAddress & 0xffff0000;
+    AddressHigh = dataStartAddress & ADDRESS_HIGH_MASK;
 
     // SegmentTable locate at top of heap
     SegmentTable = (Segment *)HeapStartAddress;
 
     for (uint32 i = 0; i < SegmentTableLength; i++) {
-        SegmentTable[i].AddressLow = (uint16)((dataStartAddress + (i * SEGMENT_SIZE)) & 0x0000ffff);
+        SegmentTable[i].AddressLow = ((dataStartAddress + (i * SEGMENT_SIZE)) & ADDRESS_LOW_MASK);
         SegmentTable[i].Used = false;
         SegmentTable[i].Last = false;
+        SegmentTable[i].Reserved = 0;
+        SegmentTable[i].Owner = 0;
     }
 }
 
-uint32 Memory::Allocate(uint32 size) {
-    
+uint32 Memory::Allocate(uint32 size, uint32 owner) {
     Segment *availableSegment;
     uint32 continuousFreeSize = 0;
     bool found = false;
@@ -44,7 +46,6 @@ uint32 Memory::Allocate(uint32 size) {
 
         } else {
             if (continuousFreeSize == 0) availableSegment = &SegmentTable[i];
-
             continuousFreeSize += SEGMENT_SIZE;
         }
 
@@ -55,22 +56,24 @@ uint32 Memory::Allocate(uint32 size) {
         }
     }
 
-    if (!found) return SEGMENT_NOT_AVAILABLE;
+    if (!found) Kernel::Assert();
 
     Segment *currentSegment = availableSegment;
     
     while (true) {
         // Set segment table as used
         currentSegment->Used = true;
+        currentSegment->Owner = owner;
 
         // Zero clear
-        uint32 *addr = (uint32 *)(AddressHigh + currentSegment->AddressLow);
+        uint8 *addr = (uint8 *)(AddressHigh + currentSegment->AddressLow);
         for (uint32 i = 0; i < SEGMENT_SIZE; i++) {
             addr[i] = 0;
         }
 
         // Last segment is already marked as last
         if (currentSegment->Last) break;
+        currentSegment++;
     }
 
     return AddressHigh + availableSegment->AddressLow;
@@ -81,7 +84,7 @@ void Memory::Release(uint32 address) {
 
     for (uint32 i = 0; i < SegmentTableLength; i++) {
         // Search segment table
-        if (SegmentTable[i].AddressLow == (uint16)(address & 0x0000ffff)) {
+        if (SegmentTable[i].AddressLow == (address & ADDRESS_LOW_MASK)) {
             found = true;
         }
 
@@ -95,5 +98,6 @@ void Memory::Release(uint32 address) {
             }
         }
     }
-}
 
+    if (!found) Kernel::Assert();
+}
