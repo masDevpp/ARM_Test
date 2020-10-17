@@ -1,5 +1,6 @@
 #include "Startup.h"
 #include "Memory.h"
+#include "Trace.h"
 
 volatile RCC_AHB1ENR_reg *Startup::RCC_AHB1ENR = (RCC_AHB1ENR_reg *)(RCC + 0x30);
 volatile RCC_APB1ENR_reg *Startup::RCC_APB1ENR = (RCC_APB1ENR_reg *)(RCC + 0x40);
@@ -14,6 +15,8 @@ void Startup::Run() {
     Memory::Setup();
 
     RCCSetup();
+
+    Trace::Setup();
 }
 
 void Startup::LoadMemory() {

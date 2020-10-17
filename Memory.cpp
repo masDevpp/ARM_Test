@@ -1,5 +1,6 @@
 #include "Memory.h"
 #include "Kernel.h"
+#include "Trace.h"
 
 Segment *Memory::SegmentTable;
 uint32 Memory::SegmentTableLength;
@@ -35,6 +36,8 @@ void Memory::Setup() {
 }
 
 uint32 Memory::Allocate(uint32 size, uint32 owner) {
+    Trace::Add("Malloc", size, owner);
+
     Segment *availableSegment;
     uint32 continuousFreeSize = 0;
     bool found = false;
@@ -76,10 +79,14 @@ uint32 Memory::Allocate(uint32 size, uint32 owner) {
         currentSegment++;
     }
 
+    Trace::Add("Malloced", AddressHigh + availableSegment->AddressLow);
+
     return AddressHigh + availableSegment->AddressLow;
 }
 
 void Memory::Release(uint32 address) {
+    Trace::Add("MemReles", address);
+
     bool found = false;
 
     for (uint32 i = 0; i < SegmentTableLength; i++) {

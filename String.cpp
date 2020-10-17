@@ -1,8 +1,15 @@
 #include "String.h"
 #include "Kernel.h"
+#include "Trace.h"
+
+String::String() {
+    Trace::Add("StrDef");
+}
 
 String::String(const void *source, uint32 length) {
     Buffer = (uint8 *)Memory::Allocate(BUFFER_LENGTH, *(uint32 *)source);
+
+    Trace::Add("StrBuf", (uint32)Buffer);
 
     uint32 i = 0;
     for (; (i < BUFFER_LENGTH && i < length); i++) {
@@ -38,6 +45,7 @@ String::String(uint32 value, uint32 base) {
 }
 
 String::~String() {
+    Trace::Add("StrRelea", (uint32)Buffer);
     Memory::Release((uint32)Buffer);
 }
 
