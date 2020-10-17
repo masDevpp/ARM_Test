@@ -10,6 +10,7 @@ public:
     ~String();
     
     bool Equal(String target);
+    bool Equal(const void *target, uint32 length = 0xffffffff);
     String SubString(uint32 start, uint32 length = 0xffffffff);
     int32 IndexOf(char c);
     const uint8 *GetBuffer();
