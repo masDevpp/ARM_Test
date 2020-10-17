@@ -9,7 +9,7 @@ LINKERSCR = linker.scr
 
 CCFLAGS = -c -Wall -march=armv7e-m+fp -mcpu=cortex-m4 -mthumb -fno-exceptions -g
 
-CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp SerialHandler.cpp Memory.cpp Kernel.cpp KernelAsm.s LEDHandler.cpp CommandHandler.cpp String.cpp
+CODES   = main.cpp vector.s vector_handler.s LED.cpp Startup.cpp Timer.cpp SerialHandler.cpp Memory.cpp Kernel.cpp KernelAsm.s LEDHandler.cpp CommandHandler.cpp String.cpp Trace.cpp
 OBJ     = *.o
 
 BINDIR = bin
