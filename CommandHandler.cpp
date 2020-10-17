@@ -30,11 +30,11 @@ void CommandHandler::Loop() {
             command = receiveString;
         }
 
-        SerialHandler::SendString(command.GetBuffer());
+        SerialHandler::SendString(command);
         SerialHandler::SendString("\n\r");
 
         if (command.Equal(String("echo"))) {
-            SerialHandler::SendString(parameter.GetBuffer());
+            SerialHandler::SendString(parameter);
         }
 
         SerialHandler::SendString("\n\r>");
