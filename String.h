@@ -16,6 +16,6 @@ public:
     uint32 Length;
 
 public:
-    static const uint32 BUFFER_LENGTH = Memory::SEGMENT_SIZE * 3;
-    uint8 *Buffer;
+    static const uint32 BUFFER_LENGTH = Memory::SEGMENT_SIZE;
+    uint8 *Buffer = nullptr;
 };
