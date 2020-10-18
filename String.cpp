@@ -43,10 +43,16 @@ String::String(uint32 value, uint32 base) {
 
     Length = workBufferIndex;
 }
-
+/*
 String::~String() {
     Trace::Add("StrRelea", (uint32)Buffer);
     Memory::Release((uint32)Buffer);
+}
+*/
+void String::Release() {
+    if (Buffer != nullptr) {
+        Memory::Release((uint32)Buffer);
+    }
 }
 
 bool String::Equal(String target) {

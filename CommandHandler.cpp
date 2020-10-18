@@ -47,6 +47,10 @@ void CommandHandler::Loop() {
 
         SerialHandler::SendString("\n\r>");
         SerialHandler::IsReceiveComplete = false;
+
+        receiveString.Release();
+        command.Release();
+        parameter.Release();
     }
 }
 

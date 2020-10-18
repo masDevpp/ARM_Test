@@ -7,7 +7,8 @@ public:
     String();
     String(const void *source, uint32 length = 0xffffffff);
     String(uint32 value, uint32 base = 10);
-    ~String();
+    //~String();
+    void Release();
     
     bool Equal(String target);
     bool Equal(const void *target, uint32 length = 0xffffffff);
