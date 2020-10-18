@@ -17,8 +17,6 @@
 
 _reset_handler:
 movw    fp, #0
-ldr     r1, =_stack_bottom
-mov     sp, r1
 bl      _ZN6Kernel5SetupEv
 b       _inf_loop
 
