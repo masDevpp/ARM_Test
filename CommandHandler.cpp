@@ -18,13 +18,9 @@ void CommandHandler::Loop() {
         
         Trace::Add("Recv", *(uint32 *)SerialHandler::SerialBuffer);
 
-        SerialHandler::SendString("\n\r");
-        SerialHandler::SendString(SerialHandler::SerialBuffer);
-        SerialHandler::SendString("\n\r");
-
         String receiveString(SerialHandler::SerialBuffer);
-        String command = nullptr;
-        String parameter = nullptr;
+        String command;
+        String parameter;
 
         Trace::Add("IdxOfSps", receiveString.IndexOf(' '));
 
@@ -38,10 +34,8 @@ void CommandHandler::Loop() {
             command = receiveString;
         }
 
-        SerialHandler::SendString(command);
-        SerialHandler::SendString("\n\r");
-
         if (command.Equal("echo")) {
+            SerialHandler::SendString("\n\r");
             SerialHandler::SendString(parameter);
         }
 
