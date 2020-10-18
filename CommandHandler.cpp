@@ -14,7 +14,10 @@ void CommandHandler::Setup() {
 
 void CommandHandler::Loop() {
     while (true) {
-        if (!SerialHandler::IsReceiveComplete) continue;
+        if (!SerialHandler::IsReceiveComplete) {
+            Kernel::ThreadSleep();
+            continue;
+        }
         
         Trace::Add("Recv", *(uint32 *)SerialHandler::SerialBuffer);
 
