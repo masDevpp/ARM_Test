@@ -51,8 +51,8 @@ mov     r0, #5
 b       _inf_loop
 
 _sv_call_handler:
-mov     r0, #6
-b       _inf_loop
+// Thread switch request from software
+b       _thread_switch
 
 _pend_sv_handler:
 mov     r0, #7

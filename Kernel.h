@@ -14,6 +14,7 @@ class Kernel {
 public:
     static void Setup();
     static void SetupThread(uint32 &firstThreadPC, uint32 &firstThreadSP);
+    static void ThreadSleep();
 
     static void Assert();
 

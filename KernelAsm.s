@@ -2,6 +2,7 @@
 .global _start_thread
 .global _thread_switch
 .global _stop_cpu
+.global _do_svc
 
 _setup_thread_stack:
 // r0: pc
@@ -95,3 +96,6 @@ bx      lr
 
 _stop_cpu:
 bkpt
+
+_do_svc:
+svc     #0
