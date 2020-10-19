@@ -72,14 +72,12 @@ bool String::Equal(const void *target, uint32 length) {
     bool isEqual = false;
     uint8 *targ = (uint8 *)target;
 
-    if (length > Length) length = Length;
-
     for (uint32 i = 0; i < length; i++) {
         isEqual = Buffer[i] == targ[i];
 
         if (!isEqual) break;
 
-        if (targ[i] == '\0') break;
+        if (Buffer[i] == '\0' || targ[i] == '\0') break;
     }
 
     return isEqual;
