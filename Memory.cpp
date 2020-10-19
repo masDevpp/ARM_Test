@@ -31,7 +31,6 @@ void Memory::Setup() {
         SegmentTable[i].Used = false;
         SegmentTable[i].Last = false;
         SegmentTable[i].Reserved = 0;
-        SegmentTable[i].Owner = 0;
     }
 }
 
@@ -66,7 +65,6 @@ uint32 Memory::Allocate(uint32 size, uint32 owner) {
     while (true) {
         // Set segment table as used
         currentSegment->Used = true;
-        currentSegment->Owner = owner;
 
         // Zero clear
         uint8 *addr = (uint8 *)(AddressHigh + currentSegment->AddressLow);

@@ -6,7 +6,6 @@ typedef struct SegmentStruct {
     uint32 Used       : 1;
     uint32 Last       : 1;
     uint32 Reserved   : 2;
-    uint32 Owner;
 } Segment;
 
 class Memory {
