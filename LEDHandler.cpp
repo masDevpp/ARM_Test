@@ -10,7 +10,7 @@ void LEDHandler::Loop() {
     for (uint32 i = 0; ; i++) {
         LED::Set(!LED::Get());
 
-        int waitLoop = (i < 50) ? 50000 : 400000;
+        int waitLoop = (i < 50) ? 50000 : 100000;
         for (int i = 0; i < waitLoop; i++);
     }
 }
