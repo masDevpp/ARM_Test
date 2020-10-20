@@ -26,6 +26,26 @@ void CommandHandler::Loop() {
             SerialHandler::SendString("\n\r");
             SerialHandler::SendString(cp.Parameter[0]);
         }
+        else if (cp.Command.Equal("memread")) {
+            SerialHandler::SendString("\n\r");
+
+            uint32 address;
+            bool success;
+
+            success = cp.Parameter[0].ToUInt32(address);
+
+            if (!success) {
+                SerialHandler::SendString("Invalid parameter");
+            } else if (address % 4) {
+                SerialHandler::SendString("Address is not aligned");
+            } else {
+                uint32 value = *(uint32 *)address;
+                String valueStr(value, 16);
+                SerialHandler::SendString("0x");
+                SerialHandler::SendString(valueStr);
+                valueStr.Release();
+            }
+        }
 
         SerialHandler::SendString("\n\r>");
         SerialHandler::IsReceiveComplete = false;
