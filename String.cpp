@@ -34,6 +34,7 @@ String::String(uint32 value, uint32 base) {
     while (value > 0) {
         workBuffer[workBufferIndex] = "0123456789ABCDEF"[value % base];
         workBufferIndex++;
+        value /= base;
     }
 
     // Reverse workBuffer char order
