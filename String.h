@@ -15,6 +15,7 @@ public:
     String SubString(uint32 start, uint32 length = 0xffffffff);
     int32 IndexOf(char c);
     const uint8 *GetBuffer();
+    bool ToUInt32(uint32 &value, uint32 base = 0);
 
     uint32 Length;
 

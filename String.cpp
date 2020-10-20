@@ -106,3 +106,38 @@ int32 String::IndexOf(char c) {
 const uint8 *String::GetBuffer() {
     return Buffer;
 }
+
+bool String::ToUInt32(uint32 &value, uint32 base) {
+    bool success = true;
+    uint32 index = 0;
+    value = 0;
+
+    if (base == 0) {
+        if (Buffer[0] == '0' && Buffer[1] == 'x') {
+            base = 16;
+            index = 2;
+        } else {
+            base = 10;
+        }
+    }
+
+    if (!(base == 10 || base == 16)) return false;
+
+    while (index < Length && Buffer[index] != '\0' && Buffer[index] != '\n' && Buffer[index] != '\r') {
+        uint32 i = 0;
+        for (; i < base; i++) {
+            if (Buffer[index] == "0123456789ABCDEF"[i]) break;
+            if (Buffer[index] == "0123456789abcdef"[i]) break;
+        }
+
+        success = i < base;
+        if (!success) break;
+
+        value *= base;
+        value += i;
+
+        index++;
+    }
+
+    return success;
+}
