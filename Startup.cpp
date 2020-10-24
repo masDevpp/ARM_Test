@@ -1,9 +1,11 @@
 #include "Startup.h"
 #include "Memory.h"
 #include "Trace.h"
+#include "Timer.h"
 
 volatile RCC_AHB1ENR_reg *Startup::RCC_AHB1ENR = (RCC_AHB1ENR_reg *)(RCC + 0x30);
 volatile RCC_APB1ENR_reg *Startup::RCC_APB1ENR = (RCC_APB1ENR_reg *)(RCC + 0x40);
+volatile RCC_APB2ENR_reg *Startup::RCC_APB2ENR = (RCC_APB2ENR_reg *)(RCC + 0x44);
 
 void Startup::Run() {
     // Enable FPU by coprocessor access control register
@@ -17,6 +19,7 @@ void Startup::Run() {
     RCCSetup();
 
     Trace::Setup();
+    TimerProvider::Setup();
 }
 
 void Startup::LoadMemory() {
@@ -41,6 +44,12 @@ void Startup::LoadMemory() {
 
 void Startup::RCCSetup() {
     RCC_AHB1ENR->GPIOAEN  = true;
-    RCC_APB1ENR->TIM2EN   = true;
+
+    RCC_APB1ENR->TIM13EN  = true;
+    RCC_APB1ENR->TIM14EN  = true;
+
     RCC_APB1ENR->USART2EN = true;
+
+    RCC_APB2ENR->TIM10EN   = true;
+    RCC_APB2ENR->TIM11EN   = true;
 }
