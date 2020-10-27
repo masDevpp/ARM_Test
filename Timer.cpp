@@ -73,7 +73,7 @@ uint32 Timer::Setup(uint16 preScaler, uint16 autoReload) {
 
     // Return max countable milli sec
     uint32 preScaledClock = HSI_CLOCK / (PreScaler + 1);
-    return AutoReload / preScaledClock * 1000;
+    return (AutoReload * 1000) / preScaledClock;
 }
 
 void Timer::Start() {
@@ -93,5 +93,5 @@ uint32 Timer::GetElapseMs() {
     
     uint32 preScaledClock = HSI_CLOCK / (PreScaler + 1);
 
-    return currentCount / preScaledClock * 1000;
+    return (currentCount * 1000) / preScaledClock;
 }
